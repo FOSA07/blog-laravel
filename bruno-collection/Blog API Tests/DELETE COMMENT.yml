@@ -1,0 +1,22 @@
+info:
+  name: DELETE COMMENT
+  type: http
+  seq: 13
+
+http:
+  method: DELETE
+  url: "{{base_url}}/comments/4"
+  auth:
+    type: bearer
+    token: 14|3QAfOb3OqNWwPKKbtkefmfdRaYaHw8sg5evi7OIX5bbbc510
+
+runtime:
+  variables:
+    - name: base_url
+      value: http://localhost:8000/api
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

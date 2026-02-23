@@ -1,0 +1,22 @@
+info:
+  name: LOGOUT
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{base_url}}/logout"
+  auth:
+    type: bearer
+    token: 12|0qtlfwlZpi89PCLH3B0h6IpaVBqal9mOJKQ0neAS9c05cca7
+
+runtime:
+  variables:
+    - name: base_url
+      value: http://localhost:8000/api
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,29 @@
+info:
+  name: CREATE A POST
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{base_url}}/posts"
+  body:
+    type: json
+    data: |-
+      {
+        "title": "Test Blog",
+        "content": "Test Blog Content"
+      }
+  auth:
+    type: bearer
+    token: 14|3QAfOb3OqNWwPKKbtkefmfdRaYaHw8sg5evi7OIX5bbbc510
+
+runtime:
+  variables:
+    - name: base_url
+      value: http://localhost:8000/api
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
