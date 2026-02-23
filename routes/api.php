@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     
     // Blog Post Protected Routes
+    Route::get('/posts/{post}/comments', [\App\Http\Controllers\CommentController::class, 'index']);
     Route::post('/posts', [\App\Http\Controllers\PostController::class, 'store']);
     Route::put('/posts/{post}', [\App\Http\Controllers\PostController::class, 'update']);
     Route::delete('/posts/{post}', [\App\Http\Controllers\PostController::class, 'destroy']);
@@ -29,5 +30,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/comments/{comment}', [\App\Http\Controllers\CommentController::class, 'destroy']);
 });
 
-// Assuming comments for a specific post is public (must be outside the middleware group above)
-Route::get('/posts/{post}/comments', [\App\Http\Controllers\CommentController::class, 'index']);
+
