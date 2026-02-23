@@ -14,24 +14,20 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        // 1. Validate the incoming request data
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        // 2. Create the user
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
 
-        // 3. Generate an API token for the user via Sanctum
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        // 4. Return the user info and token as a JSON response
         return response()->json([
             'message' => 'Registration successful',
             'user' => $user,
@@ -45,29 +41,28 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        // 1. Validate the incoming request data
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
 
-        // 2. Find the user by email
+        // Find the user by email
         $user = User::where('email', $request->email)->first();
 
-        // 3. Check if user exists and password is correct
+        // Check if user exists and password is correct
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
 
-        // 4. Delete any existing tokens (optional: keeps only one device logged in at a time)
+        // Delete any existing tokens (optional: keeps only one device logged in at a time)
         // $user->tokens()->delete();
 
-        // 5. Generate a new API token
+        // Generate a new API token
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        // 6. Return response
+        // Return response
         return response()->json([
             'message' => 'Login successful',
             'user' => $user,
