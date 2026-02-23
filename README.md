@@ -37,13 +37,12 @@ cp .env.example .env
 ```
 
 ### 4. Configure the Shared Database
-Open your `.env` file. We are using our shared PostgreSQL database hosted on Render. Replace the default database section in your `.env` with the following:
+Open your `.env` file. Replace the default database section in your `.env` with the following:
 
 ```env
 DB_CONNECTION=pgsql
-DB_URL="postgresql://user:password@host.render.com/database"
+DB_URL="postgresql database url"
 ```
-*(Contact the team lead to get the actual `DB_URL` connection string if you do not have it).*
 
 Also, to avoid port conflicts (like port 80 collisions), ensure your `.env` has:
 ```env
