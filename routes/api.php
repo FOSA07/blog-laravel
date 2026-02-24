@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Route;
 // Public Routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/posts', [\App\Http\Controllers\PostController::class, 'index']);
-Route::get('/posts/{post}', [\App\Http\Controllers\PostController::class, 'show']);
 
 // Protected Routes (Requires Sanctum Token)
 Route::middleware('auth:sanctum')->group(function () {
@@ -19,6 +17,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     
     // Blog Post Protected Routes
+    Route::get('/posts', [\App\Http\Controllers\PostController::class, 'index']);
+    Route::get('/posts/{post}', [\App\Http\Controllers\PostController::class, 'show']);
     Route::get('/posts/{post}/comments', [\App\Http\Controllers\CommentController::class, 'index']);
     Route::post('/posts', [\App\Http\Controllers\PostController::class, 'store']);
     Route::put('/posts/{post}', [\App\Http\Controllers\PostController::class, 'update']);
